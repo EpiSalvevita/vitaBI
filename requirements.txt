@@ -1,0 +1,32 @@
+# Core Data Processing
+pandas>=2.0.0
+duckdb>=0.8.0
+pyarrow>=12.0.0
+
+# Database & Storage
+sqlite3  # Built-in with Python
+redis>=4.5.0  # For future caching needs
+
+# API & Web Framework
+fastapi>=0.100.0
+uvicorn>=0.22.0
+streamlit>=1.25.0
+plotly>=5.15.0
+
+# Qlik Sense Integration (for data migration)
+requests>=2.31.0
+qlik-sense-client>=0.1.0
+
+# Background Processing (for future scaling)
+celery>=5.3.0
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+numpy>=1.24.0
+
+# Development Dependencies
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
