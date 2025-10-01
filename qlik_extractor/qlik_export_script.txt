@@ -1,0 +1,84 @@
+// Qlik Sense Export Script
+// This script can be used in Qlik Sense Data Load Editor to export all tables as QVD and CSV files
+
+// ===========================================
+// QVD Export Script
+// ===========================================
+
+// Export all tables as QVD files
+FOR vCount = 0 to NoOfTables()-1
+    LET vTableName = TableName($(vCount));
+    LET vFileName = 'lib://DataFiles/' & '$(vTableName)' & '.qvd';
+    STORE [$(vTableName)] INTO [$(vFileName)] (qvd);
+NEXT vCount
+
+// ===========================================
+// CSV Export Script (Alternative)
+// ===========================================
+
+// Export all tables as CSV files
+FOR vCount = 0 to NoOfTables()-1
+    LET vTableName = TableName($(vCount));
+    LET vFileName = 'lib://DataFiles/' & '$(vTableName)' & '.csv';
+    STORE [$(vTableName)] INTO [$(vFileName)] (txt);
+NEXT vCount
+
+// ===========================================
+// Individual Table Export (Manual)
+// ===========================================
+
+// Uncomment and modify these lines to export specific tables
+// STORE SalesData INTO 'lib://DataFiles/SalesData.qvd' (qvd);
+// STORE CustomerData INTO 'lib://DataFiles/CustomerData.qvd' (qvd);
+// STORE ProductData INTO 'lib://DataFiles/ProductData.qvd' (qvd);
+// STORE OrderData INTO 'lib://DataFiles/OrderData.qvd' (qvd);
+
+// ===========================================
+// QVD to CSV Conversion Script
+// ===========================================
+
+// If you have QVD files and want to convert them to CSV
+// FOR vCount = 0 to NoOfTables()-1
+//     LET vTableName = TableName($(vCount));
+//     LET vQvdFile = 'lib://DataFiles/' & '$(vTableName)' & '.qvd';
+//     LET vCsvFile = 'lib://DataFiles/' & '$(vTableName)' & '.csv';
+//     
+//     // Load from QVD
+//     TempTable:
+//     LOAD * FROM [$(vQvdFile)] (qvd);
+//     
+//     // Store as CSV
+//     STORE TempTable INTO [$(vCsvFile)] (txt);
+//     
+//     // Drop temp table
+//     DROP TABLE TempTable;
+// NEXT vCount
+
+// ===========================================
+// Instructions
+// ===========================================
+
+/*
+INSTRUCTIONS FOR USING THIS SCRIPT:
+
+1. Open Qlik Sense Desktop or Qlik Sense Hub
+2. Open your application
+3. Go to the Data Load Editor
+4. Copy and paste the relevant section of this script
+5. Modify the file paths if needed (lib://DataFiles/ should point to your data folder)
+6. Click "Load Data" to execute the script
+7. Check the specified folder for the exported files
+
+NOTES:
+- Make sure the data connection 'lib://DataFiles/' exists in your Qlik Sense environment
+- The script will export all tables in your application
+- QVD files are Qlik's native format and are more efficient
+- CSV files are easier to process with Python
+- You can run both scripts to get both formats
+
+FILE PATHS:
+- Change 'lib://DataFiles/' to match your data connection
+- Ensure the folder exists and you have write permissions
+- Use forward slashes (/) in file paths
+*/
+
